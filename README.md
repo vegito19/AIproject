@@ -109,7 +109,6 @@ An unofficial clone of the popular multiplayer game 'Among Us', recreated in Pyt
 
 ![ui_34_defeat](https://user-images.githubusercontent.com/69671663/147409058-2d27a26f-f21e-4323-95c1-6972cbb6a541.png)
 
-![ui_35_server](https://user-images.githubusercontent.com/69671663/147409059-2ce0dda8-87a3-4189-ba29-1ec39249814e.png)
 
 
 # Credits

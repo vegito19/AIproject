@@ -143,6 +143,27 @@ class NavigationSystem:
             t = random.choice(room_wps)
             self.set_destination(cx, cy, t.x, t.y)
 
+    @property
+    def current_destination(self):
+        return self.target_position
+
+    def get_next_waypoint(self, current_pos, target_pos=None):
+        if not self.is_moving or not self.current_path:
+            return None
+        if self.current_waypoint_index >= len(self.current_path):
+            self.is_moving = False
+            return None
+            
+        twp = self.waypoints[self.current_path[self.current_waypoint_index]]
+        if twp.distance_to(current_pos[0], current_pos[1]) < self.WAYPOINT_REACH_THRESHOLD:
+            self.current_waypoint_index += 1
+            if self.current_waypoint_index >= len(self.current_path):
+                self.is_moving = False
+                return None
+            twp = self.waypoints[self.current_path[self.current_waypoint_index]]
+            
+        return (twp.x, twp.y)
+
     def get_velocity(self, cx, cy, dt):
         if not self.is_moving or not self.current_path:
             return (0, 0)

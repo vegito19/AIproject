@@ -23,6 +23,7 @@ from ai.suspicion_engine import SuspicionEngine
 from ai.decision_engine import DecisionEngine
 from ai.memory_system import MemorySystem
 from ai.chat_system import ChatSystem
+from ai.rl_movement import RLMovementSystem
 
 
 class AIState:
@@ -71,6 +72,7 @@ class AIAgent:
         self.suspicion = SuspicionEngine(self.memory)
         self.decision = DecisionEngine(self.suspicion, self.memory)
         self.chat = ChatSystem(self.memory, self.navigation)
+        self.rl_movement = RLMovementSystem(self.navigation)
 
         # Agent state
         self.state = AIState.IDLE
@@ -229,8 +231,8 @@ class AIAgent:
                     next_task.location[0], next_task.location[1]
                 )
 
-        self.velocity = self.navigation.get_velocity(
-            self.position[0], self.position[1], dt
+        self.velocity = self.rl_movement.get_movement(
+            self.position, (next_task.location[0], next_task.location[1])
         )
 
         if self.navigation.has_reached_destination():
@@ -262,9 +264,13 @@ class AIAgent:
             self.navigation.set_random_destination(
                 self.position[0], self.position[1]
             )
-        self.velocity = self.navigation.get_velocity(
-            self.position[0], self.position[1], dt
-        )
+        
+        if self.navigation.current_destination:
+            self.velocity = self.rl_movement.get_movement(
+                self.position, self.navigation.current_destination
+            )
+        else:
+            self.velocity = (0, 0)
 
     def _do_investigate(self, dt):
         """Move toward the most suspicious player's last known location."""
@@ -282,8 +288,8 @@ class AIAgent:
             self.state = AIState.PATROLLING
             return
 
-        self.velocity = self.navigation.get_velocity(
-            self.position[0], self.position[1], dt
+        self.velocity = self.rl_movement.get_movement(
+            self.position, profile.last_known_position
         )
 
     def _do_report_body(self, dt):

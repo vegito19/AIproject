@@ -6,7 +6,20 @@ import time
 
 BUFFERSIZE = 8192
 
-print("Server Address: " + socket.gethostbyname(socket.gethostname()))
+def get_all_ips():
+    try:
+        host_name = socket.gethostname()
+        _, _, ips = socket.gethostbyname_ex(host_name)
+        return ips
+    except Exception:
+        return [socket.gethostbyname(socket.gethostname())]
+
+print("==================================================")
+print("SERVER STARTED!")
+print("Tell your friends on the hotspot to connect to one of these IPs:")
+for ip in get_all_ips():
+    print(f"  -> {ip}")
+print("==================================================")
 
 outgoing = []
 

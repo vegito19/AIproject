@@ -75,10 +75,10 @@ class ChatSystem:
         self.navigation = navigation_system
         self.chat_history = []
         
-        # LLM Settings for Phi-3 via Ollama
+        # LLM Settings for Qwen via Ollama
         self.use_llm = True
         self.llm_url = "http://localhost:11434/api/generate"
-        self.llm_model = "phi3"
+        self.llm_model = "qwen3.5:4b"
         self.llm_timeout = 2.0  # Fast timeout so the game doesn't freeze
 
     def _query_llm(self, context_prompt, fallback_text):
