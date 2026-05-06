@@ -13,6 +13,7 @@ from pygame import mixer
 from menu import Menu
 from board import Board
 from gamefunctions import GameFunctions
+from ai.ai_bot import AIBot
 from tasks import *
 import time, datetime
 import time
@@ -716,43 +717,43 @@ class Game:
 
             if tile_object.name == 'bot1':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot1 = Bot(self, tile_object.x, tile_object.y, "Left", "bot1", bot_colours_temp_current)
+                self.bot1 = AIBot(self, tile_object.x, tile_object.y, "Left", "bot1", bot_colours_temp_current, bot_id=1)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot2':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot2 = Bot(self, tile_object.x, tile_object.y, "Right", "bot2", bot_colours_temp_current)
+                self.bot2 = AIBot(self, tile_object.x, tile_object.y, "Right", "bot2", bot_colours_temp_current, bot_id=2)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot3':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot3 = Bot(self, tile_object.x, tile_object.y, "Down", "bot3", bot_colours_temp_current)
+                self.bot3 = AIBot(self, tile_object.x, tile_object.y, "Down", "bot3", bot_colours_temp_current, bot_id=3)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot4':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot4 = Bot(self, tile_object.x, tile_object.y, "Down", "bot4", bot_colours_temp_current)
+                self.bot4 = AIBot(self, tile_object.x, tile_object.y, "Down", "bot4", bot_colours_temp_current, bot_id=4)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot5':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot5 = Bot(self, tile_object.x, tile_object.y, "Right", "bot5", bot_colours_temp_current)
+                self.bot5 = AIBot(self, tile_object.x, tile_object.y, "Right", "bot5", bot_colours_temp_current, bot_id=5)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot6':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot6 = Bot(self, tile_object.x, tile_object.y, "Right", "bot6", bot_colours_temp_current)
+                self.bot6 = AIBot(self, tile_object.x, tile_object.y, "Right", "bot6", bot_colours_temp_current, bot_id=6)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot7':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot7 = Bot(self, tile_object.x, tile_object.y, "Up", "bot7", bot_colours_temp_current)
+                self.bot7 = AIBot(self, tile_object.x, tile_object.y, "Up", "bot7", bot_colours_temp_current, bot_id=7)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot8':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot8 = Bot(self, tile_object.x, tile_object.y, "Down", "bot8", bot_colours_temp_current)
+                self.bot8 = AIBot(self, tile_object.x, tile_object.y, "Down", "bot8", bot_colours_temp_current, bot_id=8)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot9':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot9 = Bot(self, tile_object.x, tile_object.y, "Right", "bot9", bot_colours_temp_current)
+                self.bot9 = AIBot(self, tile_object.x, tile_object.y, "Right", "bot9", bot_colours_temp_current, bot_id=9)
                 bot_colours_temp.remove(bot_colours_temp_current)
             if tile_object.name == 'bot10':
                 bot_colours_temp_current = random.choice(bot_colours_temp)
-                self.bot10 = Bot(self, tile_object.x, tile_object.y, "Up", "bot10", bot_colours_temp_current)
+                self.bot10 = AIBot(self, tile_object.x, tile_object.y, "Up", "bot10", bot_colours_temp_current, bot_id=10)
                 bot_colours_temp.remove(bot_colours_temp_current)
 
             # if tile object - heath exists in our dictionary
