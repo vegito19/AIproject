@@ -13,4 +13,6 @@
 #   - memory_system:     Event logging & behavioral memory
 #   - chat_system:       Rule-based dialogue generation
 
-from ai.ai_agent import AIAgent
+from ai.ai_agent import AIAgent  # noqa: F401 (public re-export)
+
+__all__ = ['AIAgent']

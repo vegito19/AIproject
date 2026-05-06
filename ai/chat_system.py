@@ -174,8 +174,9 @@ class ChatSystem:
                     *top_event.location
                 ) if top_event.location else None
                 reason = self._event_to_text(top_event)
+                room_text = f" in {room}" if room else ""
                 statements.append(
-                    f"Player {self._get_player_name(pid)}: {reason}"
+                    f"Player {self._get_player_name(pid)}: {reason}{room_text}"
                 )
 
         return " | ".join(statements) if statements else self.generate_uncertain()

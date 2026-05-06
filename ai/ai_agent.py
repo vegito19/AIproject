@@ -13,8 +13,8 @@ Usage:
     velocity = agent.get_movement()
 """
 
+import math
 import time
-import random
 
 from ai.navigation_system import NavigationSystem
 from ai.task_system import TaskSystem
@@ -313,7 +313,7 @@ class AIAgent:
             if pid == self.player_id:
                 continue
             if profile.last_known_position:
-                import math
+
                 dist = math.sqrt(
                     (profile.last_known_position[0] - self.body_found_position[0])**2 +
                     (profile.last_known_position[1] - self.body_found_position[1])**2
