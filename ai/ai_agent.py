@@ -223,6 +223,8 @@ class AIAgent:
             self.state = AIState.PATROLLING
             return
 
+        # Ensure next_task is always defined before use
+        next_task = None
         if not self.navigation.is_moving:
             next_task = self.tasks.get_next_task()
             if next_task:
@@ -231,11 +233,21 @@ class AIAgent:
                     next_task.location[0], next_task.location[1]
                 )
 
-        self.velocity = self.rl_movement.get_movement(
-            self.position, (next_task.location[0], next_task.location[1])
-        )
+        # Determine target location for movement: prefer next_task, else current destination
+        if next_task:
+            target = (next_task.location[0], next_task.location[1])
+        elif self.navigation.current_destination:
+            target = self.navigation.current_destination
+        else:
+            # Nothing to move to; switch to patrol
+            self.state = AIState.PATROLLING
+            self.velocity = (0, 0)
+            return
+
+        self.velocity = self.rl_movement.get_movement(self.position, target)
 
         if self.navigation.has_reached_destination():
+            # When arriving, re-query next task in case it became available
             next_task = self.tasks.get_next_task()
             if next_task:
                 self.tasks.start_task(next_task)

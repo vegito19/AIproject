@@ -129,11 +129,15 @@ class ObservationSystem:
         if len(history) < 4:
             return
 
-        # Check last 4 positions for direction reversals
+        # Use the last 4 known positions and safely compute direction deltas
+        last_positions = history[-4:]
         changes = 0
-        for i in range(len(history) - 3, len(history) - 1):
-            d1 = (history[i+1][0] - history[i][0], history[i+1][1] - history[i][1])
-            d2 = (history[i+2][0] - history[i+1][0], history[i+2][1] - history[i+1][1])
+        for i in range(len(last_positions) - 2):
+            p0 = last_positions[i]
+            p1 = last_positions[i+1]
+            p2 = last_positions[i+2]
+            d1 = (p1[0] - p0[0], p1[1] - p0[1])
+            d2 = (p2[0] - p1[0], p2[1] - p1[1])
             # Dot product — negative means direction reversal
             dot = d1[0] * d2[0] + d1[1] * d2[1]
             if dot < 0:
