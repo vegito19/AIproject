@@ -15,6 +15,5 @@ while True:
     # g.missions_done == 0
     # g.new() # create sprites/objects/walls
     # g.run() # run the game function
-s.close()
 
 
